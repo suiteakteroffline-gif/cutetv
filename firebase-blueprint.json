@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "tv_room": {
+      "title": "TV Room",
+      "description": "Active TV streaming room session paired with remote control",
+      "type": "object",
+      "properties": {
+        "roomCode": { "type": "string" },
+        "status": { "type": "string", "enum": ["waiting", "connected", "terminated"] },
+        "createdAt": { "type": "string" },
+        "lastActive": { "type": "string" },
+        "controllerId": { "type": "string" },
+        "currentMedia": { "type": "object" },
+        "playbackCommand": { "type": "object" },
+        "tvState": { "type": "object" }
+      },
+      "required": ["roomCode", "status"]
+    },
+    "remote_session": {
+      "title": "Remote Session",
+      "description": "D-Pad Remote pairing session",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "lastActive": { "type": "string" },
+        "lastCommand": { "type": "object" },
+        "playerState": { "type": "object" },
+        "paired": { "type": "boolean" }
+      },
+      "required": ["code"]
+    }
+  },
+  "firestore": {
+    "/tv_rooms/{roomCode}": {
+      "schema": "tv_room",
+      "description": "Real-time TV room sync sessions"
+    },
+    "/remote_sessions/{sessionCode}": {
+      "schema": "remote_session",
+      "description": "Real-time remote control sessions"
+    }
+  }
+}
